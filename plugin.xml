@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:amazon="http://schemas.android.com/apk/lib/com.amazon.device.ads"
     xmlns:rim="http://www.blackberry.com/ns/widgets"
-    id="com.gate6.PushPlugin"
+    id="com.phonegap.plugins.PushPlugin"
     version="2.5.0">
 
   <name>PushPlugin</name>
-	<author>Gate6 Technologies</author>
+	<author>Bob Easterday</author>
 
 	<description>
 		This plugin allows your application to receive push notifications on Android, iOS, WP8 and Windows8 devices.
@@ -67,9 +67,12 @@
 		</config-file>
 
 		<source-file src="src/android/libs/gcm.jar" target-dir="libs/" />
+		<source-file src="src/android/com/plugin/gcm/CordovaGCMBroadcastReceiver.java" target-dir="src/com/plugin/gcm/" />
 		<source-file src="src/android/com/plugin/gcm/PushNotificationService.java" target-dir="src/com/plugin/gcm/" />
+		<source-file src="src/android/com/plugin/gcm/GCMIntentService.java" target-dir="src/com/plugin/gcm/" />
 		<source-file src="src/android/com/plugin/gcm/PushHandlerActivity.java" target-dir="src/com/plugin/gcm/" />
 		<source-file src="src/android/com/plugin/gcm/PushPlugin.java" target-dir="src/com/plugin/gcm/" />
+
 	</platform>
 
     <!-- amazon-fireos -->
