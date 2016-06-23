@@ -1,9 +1,3 @@
-# [DEPRECATED] Cordova Push Notifications Plugin for Android, iOS, WP8, Windows8, BlackBerry 10 and Amazon Fire OS
-
-
-### _This plugin is deprecated, i.e. it is no longer maintained. Going forward additional features and bug fixes will be added to the new [phonegap-plugin-push](https://github.com/phonegap/phonegap-plugin-push) repository._
-
-
 ## DESCRIPTION
 
 This plugin is for use with [Cordova](http://incubator.apache.org/cordova/), and allows your application to receive push notifications on Amazon Fire OS, Android, iOS, Windows Phone and Windows8 devices.
@@ -151,7 +145,9 @@ The final hierarchy will likely look something like this:
 ```xml
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+<uses-permission android:name="com.google.android.c2dm.permission.SEND" />
 <uses-permission android:name="android.permission.WAKE_LOCK" />
+<uses-permission android:name="android.permission.VIBRATE"/>
 <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 <permission android:name="$PACKAGE_NAME.permission.C2D_MESSAGE" android:protectionLevel="signature" />
 <uses-permission android:name="$PACKAGE_NAME.permission.C2D_MESSAGE" />
@@ -160,15 +156,20 @@ The final hierarchy will likely look something like this:
 3) Modify your `AndroidManifest.xml` and add the following **activity**, **receiver** and **service** tags to your **application** section. (See the Sample_AndroidManifest.xml file in the Example folder.)
 
 ```xml
-<activity android:name="com.plugin.gcm.PushHandlerActivity"/>
-<receiver android:name="com.plugin.gcm.CordovaGCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND" >
-	<intent-filter>
-		<action android:name="com.google.android.c2dm.intent.RECEIVE" />
-		<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-		<category android:name="$PACKAGE_NAME" />
-	</intent-filter>
+<activity android:name="com.plugin.gcm.PushHandlerActivity" android:exported="true"/>
+<service android:name="com.plugin.gcm.PushNotificationService" android:exported="false" android:enabled="true">
+    <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+    </intent-filter>
+</service>
+
+<receiver android:name="com.google.android.gms.gcm.GcmReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND" >
+    <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+        <category android:name="$PACKAGE_NAME" />
+    </intent-filter>
 </receiver>
-<service android:name="com.plugin.gcm.GCMIntentService" />
 ```
 
 4) Check that the launch mode for the main Cordova Activity is one of the **[singleXXX](http://developer.android.com/guide/topics/manifest/activity-element.html#lmode)** options in **AndroidManifest.xml**.
@@ -275,7 +276,7 @@ The plugin can be installed via the Cordova command line interface:
 1) Navigate to the root folder for your phonegap project. 2) Run the command.
 
 ```sh
-cordova plugin add https://github.com/phonegap-build/PushPlugin.git
+cordova plugin add https://github.com/rajendrakhabiyagate6/com.gate6.PushPlugin.git
 ```
 
 ### Phonegap
@@ -285,7 +286,7 @@ The plugin can be installed using the Phonegap command line interface:
 1) Navigate to the root folder for your phonegap project. 2) Run the command.
 
 ```sh
-phonegap local plugin add https://github.com/phonegap-build/PushPlugin.git
+phonegap local plugin add https://github.com/rajendrakhabiyagate6/com.gate6.PushPlugin.git
 ```
 
 ### Plugman
